@@ -1,0 +1,14 @@
+# frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-frontend
+  namespace: default 
+spec:
+  selector:
+    app: rag-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8501
+  type: NodePort

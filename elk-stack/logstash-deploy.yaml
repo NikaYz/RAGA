@@ -1,0 +1,113 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: logstash
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: logstash
+#   template:
+#     metadata:
+#       labels:
+#         app: logstash
+#     spec:
+#       containers:
+#         - name: logstash
+#           image: docker.elastic.co/logstash/logstash:7.17.0
+#           ports:
+#             - containerPort: 5000
+#           volumeMounts:
+#             - name: config
+#               mountPath: /usr/share/logstash/pipeline/logstash.conf
+#               subPath: logstash.conf
+#       volumes:
+#         - name: config
+#           configMap:
+#             name: logstash-config
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: logstash-config
+# data:
+#   logstash.conf: |
+#     input {
+#       tcp {
+#         port => 5000
+#         codec => json_lines
+#       }
+#     }
+
+#     filter {
+#       # Add parsing here if needed
+#     }
+
+#     output {
+#       elasticsearch {
+#         hosts => ["http://elasticsearch:9200"]
+#         index => "rag-logs-%{+YYYY.MM.dd}"
+#       }
+#       stdout { codec => rubydebug }
+#     }
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      containers:
+        - name: logstash
+          image: docker.elastic.co/logstash/logstash:7.17.0
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          volumeMounts:
+            - name: config
+              mountPath: /usr/share/logstash/pipeline/logstash.conf
+              subPath: logstash.conf
+      volumes:
+        - name: config
+          configMap:
+            name: logstash-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-config
+  namespace: default 
+data:
+  logstash.conf: |
+    input {
+      tcp {
+        port => 5000
+        codec => json_lines
+      }
+    }
+
+    filter {
+      # Add parsing here if needed
+    }
+
+    output {
+      elasticsearch {
+        hosts => ["http://elasticsearch:9200"]
+        index => "rag-logs-%{+YYYY.MM.dd}"
+      }
+      stdout { codec => rubydebug }
+    }

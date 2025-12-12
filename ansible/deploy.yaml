@@ -1,0 +1,34 @@
+# ansible/deploy.yaml
+---
+- name: Deploy Shaky app to Kubernetes cluster
+  hosts: localhost
+  become: false
+  vars:
+    kubeconfig: "~/.kube/config"
+  tasks:
+    - name: Apply Kubernetes manifests
+      community.kubernetes.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        namespace: default         # <--- Add this
+        src: "{{ item }}"
+      loop:
+        - ../kubernetes/faiss-pvc.yaml
+        - ../kubernetes/backend-deployment.yaml
+        - ../kubernetes/backend-service.yaml
+        - ../kubernetes/frontend-deployment.yaml
+        - ../kubernetes/frontend-service.yaml
+        - ../kubernetes/ingress.yaml
+        - ../kubernetes/hpa.yaml
+        - ../elk-stack/elasticsearch-deploy.yaml
+        - ../elk-stack/kibana-deploy.yaml
+        - ../elk-stack/logstash-deploy.yaml
+        - ../elk-stack/logstash-service.yaml
+      register: k8s_apply
+
+    - name: Wait for deployments to rollout
+      community.kubernetes.k8s_info:
+        kubeconfig: "{{ kubeconfig }}"
+        kind: Deployment
+        namespace: default
+      register: deploys

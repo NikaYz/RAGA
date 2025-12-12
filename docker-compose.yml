@@ -1,0 +1,34 @@
+#docker-compose.yml 
+
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend/pipeline/cache:/shakespeare/backend/pipeline/cache
+      - ./backend/logs:/var/log
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.0
+    volumes:
+      - ./elk-stack/logstash-config.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - "5001:5000"

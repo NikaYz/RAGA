@@ -1,0 +1,17 @@
+# kubernetes/logstash-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  # The name 'logstash' is crucial, as it matches the default hostname
+  # used by the backend application: LOGSTASH_HOST = "logstash"
+  name: logstash 
+  namespace: default 
+spec:
+  # Selects pods with the label 'app: logstash' (from your Deployment)
+  selector:
+    app: logstash
+  ports:
+    - protocol: TCP
+      port: 5000      # The internal port of the Service (what the backend calls)
+      targetPort: 5000 # The containerPort exposed by the Logstash Pod
+  type: ClusterIP      # Makes it accessible only inside the cluster

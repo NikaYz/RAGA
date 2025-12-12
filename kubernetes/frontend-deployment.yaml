@@ -1,0 +1,22 @@
+# kubernetes/frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-frontend
+  namespace: default 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rag-frontend
+  template:
+    metadata:
+      labels:
+        app: rag-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: nikayz/shaky-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8501

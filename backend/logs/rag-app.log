@@ -1,0 +1,62 @@
+2025-12-08 10:54:52 - rag - INFO - Loading FAISS index from disk...
+2025-12-08 10:54:52 - rag - INFO - FAISS index loaded. docs=171
+2025-12-08 10:54:52 - rag - INFO - Server startup complete
+2025-12-08 10:56:51 - rag - INFO - Loading FAISS index from disk...
+2025-12-08 10:56:51 - rag - INFO - FAISS index loaded. docs=171
+2025-12-08 10:56:51 - rag - INFO - Server startup complete
+2025-12-08 10:57:46 - rag - INFO - Received query: who was brutus
+2025-12-08 10:58:03 - rag - ERROR - Error handling query: 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "/shakespeare/server.py", line 123, in query_endpoint
+    context = "\n".join([d.get("text", "") for d in docs])
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/shakespeare/server.py", line 123, in <listcomp>
+    context = "\n".join([d.get("text", "") for d in docs])
+                         ^^^^^
+AttributeError: 'str' object has no attribute 'get'
+2025-12-08 11:01:43 - rag - INFO - Loading FAISS index from disk...
+2025-12-08 11:01:43 - rag - INFO - FAISS index loaded. docs=171
+2025-12-08 11:01:43 - rag - INFO - Server startup complete
+2025-12-08 11:02:06 - rag - INFO - Received query: who killed brutus
+2025-12-08 11:02:26 - rag - ERROR - Error handling query: 'str' object has no attribute 'page_content'
+Traceback (most recent call last):
+  File "/shakespeare/server.py", line 124, in query_endpoint
+    context = "\n".join([d.page_content for d in docs])
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/shakespeare/server.py", line 124, in <listcomp>
+    context = "\n".join([d.page_content for d in docs])
+                         ^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'page_content'
+2025-12-08 11:05:44 - rag - INFO - Loading FAISS index from disk...
+2025-12-08 11:05:44 - rag - INFO - FAISS index loaded. docs=171
+2025-12-08 11:05:44 - rag - INFO - Server startup complete
+2025-12-08 11:09:06 - rag - INFO - Loading FAISS index from disk...
+2025-12-08 11:09:06 - rag - INFO - FAISS index loaded. docs=171
+2025-12-08 11:09:06 - rag - INFO - Server startup complete
+2025-12-08 11:09:42 - rag - INFO - Received query: who killed brutus?
+2025-12-08 11:10:00 - rag - INFO - LLM call: question=who killed brutus?
+2025-12-08 11:10:00 - rag - INFO - Answered query; sources=5
+2025-12-08 11:10:38 - rag - INFO - Received query: How does Caesar first enter the play?
+2025-12-08 11:10:42 - rag - INFO - LLM call: question=How does Caesar first enter the play?
+2025-12-08 11:10:42 - rag - INFO - Answered query; sources=5
+2025-12-08 11:14:14 - rag - INFO - Loading FAISS index from disk...
+2025-12-08 11:14:14 - rag - INFO - FAISS index loaded. docs=171
+2025-12-08 11:14:14 - rag - INFO - Server startup complete
+2025-12-08 11:16:03 - rag - INFO - Loading FAISS index from disk...
+2025-12-08 11:16:03 - rag - INFO - FAISS index loaded. docs=171
+2025-12-08 11:16:03 - rag - INFO - Server startup complete
+2025-12-08 11:16:48 - rag - INFO - Received query: who killed brutus?
+2025-12-08 11:17:06 - rag - INFO - LLM call: question=who killed brutus?
+2025-12-08 11:17:06 - rag - INFO - Answered query; sources=5
+2025-12-08 11:23:13 - rag - INFO - Loading FAISS index from disk...
+2025-12-08 11:23:13 - rag - INFO - FAISS index loaded. docs=171
+2025-12-08 11:23:13 - rag - INFO - Server startup complete
+2025-12-08 11:23:24 - rag - INFO - Received query: who killed brutus
+2025-12-08 11:23:42 - rag - INFO - LLM call: question=who killed brutus
+2025-12-08 11:23:42 - rag - INFO - Answered query; sources=5
+2025-12-08 11:51:47 - rag - INFO - Loading FAISS index from disk...
+2025-12-08 11:51:47 - rag - INFO - FAISS index loaded. docs=171
+2025-12-08 11:52:04 - rag - INFO - RAG Pipeline initialized successfully.
+2025-12-08 11:52:04 - rag - INFO - Server startup complete
+2025-12-08 11:53:28 - rag - INFO - Received query: who killed brutus
+2025-12-08 11:53:32 - rag - INFO - Answered query; sources=10

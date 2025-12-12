@@ -1,0 +1,9 @@
+# backend/.dockerignore
+__pycache__/
+*.pyc
+*.pkl
+pipeline/data/* # Exclude raw data files
+pipeline/cache/* # Exclude built FAISS/metadata files
+logs/*
+.git
+.venv
