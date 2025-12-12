@@ -45,7 +45,7 @@ pipeline {
                     // ansible-playbook needs to know python3 is the interpreter
                     sh '''
                         ansible-playbook deploy.yaml \
-                        -e "ansible_python_interpreter=/usr/bin/python3" \
+                        -e "ansible_python_interpreter=/opt/venv/bin/python3" \
                         -v
                     '''
                 }
