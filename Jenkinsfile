@@ -7,7 +7,8 @@ pipeline {
         BACKEND_IMAGE = "nikayz/shaky-backend:v3"
         FRONTEND_IMAGE = "nikayz/shaky-frontend:latest"
         // Credentials ID you created in Jenkins
-        GEMINI_API_KEY = credentials('gemini-api-key-id')
+        //GEMINI_API_KEY = credentials('gemini-api-key-id')
+        GEMINI_API_KEY = credentials('4c340a66-c823-4839-8a6a-1a26f773f071')
     }
 
     stages {
